@@ -10,6 +10,7 @@ window.title("goban")
 
 # This will be a tsume go program that gives you predetermined tsume go problems and you must continue in the right order
 # There will be a specified position to click, and if you click it the series will continue, with random in 'Sensei' Responses in another window
+# Sensei will be open in another window, they will be chosen before game
 
 # create a photoimage variable
 black = tk.PhotoImage(file='goBLACK.png')
