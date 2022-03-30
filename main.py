@@ -9,6 +9,7 @@ window = tk.Tk()
 window.title("goban")
 
 # This will be a tsume go program that gives you predetermined tsume go problems and you must continue in the right order
+# There will be a specified position to click, and if you click it the series will continue, with random in 'Sensei' Responses in another window
 
 # create a photoimage variable
 black = tk.PhotoImage(file='goBLACK.png')
@@ -18,8 +19,21 @@ black = black.zoom(2)
 white = white.zoom(2)
 empty = empty.zoom(2)
 
-def place(bStarts,wStarts,change,size=19):
-    """This is given starting positions and outputs a board"""
+################
+# create board #
+################
+def create_board(blackPts,whitePts,size=19):
+    """Creates inital board set up"""
+
+#####################################
+# create specified changes to board #
+#####################################
+
+###########################
+# generate playable board #
+###########################
+def place(bStarts,wStarts,size=19):
+    """This is given starting positions and outputs a board OUTDATED METHOD I THINK"""
     for x in range(size):
         for y in range(size): 
            # Asigns Color variable
@@ -49,6 +63,14 @@ def play_on_board(board,changes):
     """Takes 2d board list and then makes changes"""
     print("Hello World :)")
 
+############
+## SENSEI ##
+############
+
+
+##############
+## Run Game ##
+##############
 
 x = ['(0,0)']
 y = ['(2,2)']
