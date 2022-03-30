@@ -41,10 +41,18 @@ def place(bStarts,wStarts,change,size=19):
                 point = tk.Button(image=empty)
                 point.grid(column=x,row=y)
 
+def place_on_board(board):
+    """takes a 2d list and generates the playable board"""
+    print("temp message")
+
+def play_on_board(board,changes):
+    """Takes 2d board list and then makes changes"""
+    print("Hello World :)")
+
 
 x = ['(0,0)']
 y = ['(2,2)']
 
-place(x,y,0,)
+place(x,y,0)
 
 tk.mainloop()
