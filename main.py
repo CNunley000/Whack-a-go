@@ -67,6 +67,6 @@ def play_on_board(board,changes):
 x = ['(0,0)']
 y = ['(2,2)']
 
-place(x,y,0)
+place(x,y)
 
 tk.mainloop()
