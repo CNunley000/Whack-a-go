@@ -2,7 +2,6 @@
 # Comp Prog 2
 # No Cheating :)
 
-from re import X
 import tkinter as tk
 
 window = tk.Tk()
@@ -37,22 +36,14 @@ def place(bStarts,wStarts,size=19):
     """This is given starting positions and outputs a board OUTDATED METHOD I THINK"""
     for x in range(size):
         for y in range(size): 
-           # Asigns Color variable
-            if f"({x},{y})" in bStarts:
-                color = 'b'
-            elif f"({x},{y})" in wStarts:
-                color = 'w'
-            else:
-                color = 'x'
-            
             # based on 'color' create button
-            if color == 'b':
+            if f"({x},{y})" in bStarts:
                 black_stone = tk.Button(image=black)
                 black_stone.grid(column=x,row=y)
-            elif color == 'w':
+            elif f"({x},{y})" in wStarts:
                 white_stone = tk.Button(image=white)
                 white_stone.grid(column=x,row=y)
-            elif color == 'x':
+            else:
                 point = tk.Button(image=empty)
                 point.grid(column=x,row=y)
 
