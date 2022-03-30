@@ -1,6 +1,6 @@
 # Conner Nunley
 # Comp Prog 2
-# No Cheating
+# No Cheating :)
 
 from re import X
 import tkinter as tk
