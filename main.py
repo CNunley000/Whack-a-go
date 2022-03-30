@@ -15,9 +15,12 @@ window.title("goban")
 black = tk.PhotoImage(file='goBLACK.png')
 white = tk.PhotoImage(file='goWHITE.png')
 empty = tk.PhotoImage(file='goEMPTY.png')
-black = black.zoom(2)
-white = white.zoom(2)
-empty = empty.zoom(2)
+
+size = 1
+
+black = black.zoom(size)
+white = white.zoom(size)
+empty = empty.zoom(size)
 
 ################
 # create board #
