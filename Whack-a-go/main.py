@@ -31,7 +31,11 @@ def create_board(blackPts,whitePts,size=19):
         board.append([])
         for y in range(size):
             if f"({x},{y})" in blackPts:
-                board[x].append(b)
+                board[x].append('b')
+            elif f"({x},{y})" in whitePts:
+                board[x].append('w')
+            else:
+                board[x].append(' ')
 
     return(board)
 
@@ -73,8 +77,10 @@ def play_on_board(board,changes):
 ##############
 ## Run Game ##
 ##############
-goban = create_board(0,0)
 
-print(goban)
+black_list = ["(0,0)"]
+white_list = ["(3,3)"]
+
+print(create_board(black_list,white_list))
 
 tk.mainloop()
