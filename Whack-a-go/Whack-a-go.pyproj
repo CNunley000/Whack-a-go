@@ -2,15 +2,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>bef2c5f0-1c37-471c-833b-61bfb93ca1be</ProjectGuid>
+    <ProjectGuid>6f090065-60f0-421d-8806-c314e2147e9b</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>WhackAGo.py</StartupFile>
+    <StartupFile>Whack_a_go.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>WhackAGo</Name>
-    <RootNamespace>WhackAGo</RootNamespace>
+    <Name>Whack-a-go</Name>
+    <RootNamespace>Whack-a-go</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="WhackAGo.py" />
+    <Compile Include="Whack_a_go.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

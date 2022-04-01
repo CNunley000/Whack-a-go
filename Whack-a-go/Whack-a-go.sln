@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "WhackAGo", "WhackAGo.pyproj", "{BEF2C5F0-1C37-471C-833B-61BFB93CA1BE}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Whack-a-go", "Whack-a-go.pyproj", "{6F090065-60F0-421D-8806-C314E2147E9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +11,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BEF2C5F0-1C37-471C-833B-61BFB93CA1BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BEF2C5F0-1C37-471C-833B-61BFB93CA1BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F090065-60F0-421D-8806-C314E2147E9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F090065-60F0-421D-8806-C314E2147E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7AD9B4DC-6C74-4D61-86EF-FB74FEA9D132}
+		SolutionGuid = {47E50AC8-6AFB-4B94-9875-D04669439EED}
 	EndGlobalSection
 EndGlobal
