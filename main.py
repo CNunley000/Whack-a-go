@@ -26,7 +26,15 @@ empty = empty.zoom(size)
 # create board #
 ################
 def create_board(blackPts,whitePts,size=19):
-    """Creates inital board set up"""
+    """Creates inital board set up in A 2d List"""
+    board = []
+    
+    for x in range(size):
+        board.append([])
+        for y in range(size):
+            board[x].append(y)
+
+    return(board)
 
 #####################################
 # create specified changes to board #
@@ -35,7 +43,7 @@ def create_board(blackPts,whitePts,size=19):
 ###########################
 # generate playable board #
 ###########################
-def place(bStarts,wStarts,size=19):
+def place(bStarts,wStarts,size=19): # OUTDATED
     """This is given starting positions and outputs a board OUTDATED METHOD I THINK"""
     for x in range(size):
         for y in range(size): 
@@ -55,7 +63,7 @@ def place_on_board(board):
     print("temp message")
 
 def play_on_board(board,changes):
-    """Takes 2d board list and then makes changes"""
+    """changes 2d board list"""
     print("Hello World :)")
 
 ############
@@ -67,9 +75,8 @@ def play_on_board(board,changes):
 ## Run Game ##
 ##############
 
-x = ['(0,0)']
-y = ['(2,2)']
+goban = create_board(0,0)
 
-place(x,y)
+print(goban)
 
 tk.mainloop()
