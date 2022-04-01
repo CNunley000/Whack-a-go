@@ -12,15 +12,13 @@ window.title("goban")
 # Sensei will be open in another window, they will be chosen before game
 
 # create a photoimage variable
-black = tk.PhotoImage(file='goBLACK.png')
-white = tk.PhotoImage(file='goWHITE.png')
-empty = tk.PhotoImage(file='goEMPTY.png')
-
-size = 1
-
-black = black.zoom(size)
-white = white.zoom(size)
-empty = empty.zoom(size)
+def load_images(size):
+    black = tk.PhotoImage(file='goBLACK.png')
+    white = tk.PhotoImage(file='goWHITE.png')
+    empty = tk.PhotoImage(file='goEMPTY.png')
+    black = black.zoom(size)
+    white = white.zoom(size)
+    empty = empty.zoom(size)
 
 ################
 # create board #
@@ -32,7 +30,8 @@ def create_board(blackPts,whitePts,size=19):
     for x in range(size):
         board.append([])
         for y in range(size):
-            board[x].append(y)
+            if f"({x},{y})" in blackPts:
+                board[x].append(b)
 
     return(board)
 
@@ -74,7 +73,6 @@ def play_on_board(board,changes):
 ##############
 ## Run Game ##
 ##############
-
 goban = create_board(0,0)
 
 print(goban)
