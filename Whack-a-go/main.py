@@ -3,6 +3,7 @@
 # No Cheating :)
 
 import tkinter as tk
+import csv
 
 window = tk.Tk()
 window.title("goban")
@@ -91,6 +92,11 @@ def place(board):
                 point.grid(column=col,row=row)
                 
 
+##############
+## Problems ##
+##############
+
+t1 = {'black':[0,1],'white':[0,1],'next':[0,1]]
 
 ############
 ## SENSEI ##
