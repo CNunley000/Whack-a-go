@@ -12,6 +12,16 @@ window.title("goban")
 # Sensei will be open in another window, they will be chosen before game
 
 # create a photoimage variable
+size = 1
+
+black = tk.PhotoImage(file='goBLACK.png')
+white = tk.PhotoImage(file='goWHITE.png')
+empty = tk.PhotoImage(file='goEMPTY.png')
+black = black.zoom(size)
+white = white.zoom(size)
+empty = empty.zoom(size)
+
+
 def load_images(size):
     black = tk.PhotoImage(file='goBLACK.png')
     white = tk.PhotoImage(file='goWHITE.png')
@@ -42,11 +52,15 @@ def create_board(blackPts,whitePts,size=19):
 #####################################
 # create specified changes to board #
 #####################################
+def play(board,changes):
+    """changes 2d board list"""
+    print("Hello World :)")
+
 
 ###########################
 # generate playable board #
 ###########################
-def place(bStarts,wStarts,size=19): # OUTDATED
+def placeDUMB(bStarts,wStarts,size=19): # OUTDATED
     """This is given starting positions and outputs a board OUTDATED METHOD I THINK"""
     for x in range(size):
         for y in range(size): 
@@ -61,18 +75,30 @@ def place(bStarts,wStarts,size=19): # OUTDATED
                 point = tk.Button(image=empty)
                 point.grid(column=x,row=y)
 
-def place_on_board(board):
-    """takes a 2d list and generates the playable board"""
-    print("temp message")
+def place(board):
+    """takes a 2d list and generates the playable board WINDOW"""
+    for row in range(0,len(board)):
+        for col in range(0,len(board)):
+            current = board[row][col]
+            if current == 'b':
+                black_stone = tk.Button(image=black)
+                black_stone.grid(column=col,row=row)
+            elif current == 'w':
+                white_stone = tk.Button(image=white)
+                white_stone.grid(column=col,row=row)
+            else:
+                point = tk.Button(image=empty)
+                point.grid(column=col,row=row)
+                
 
-def play_on_board(board,changes):
-    """changes 2d board list"""
-    print("Hello World :)")
 
 ############
 ## SENSEI ##
 ############
 
+# Create settings
+
+# read settings
 
 ##############
 ## Run Game ##
@@ -81,6 +107,10 @@ def play_on_board(board,changes):
 black_list = ["(0,0)"]
 white_list = ["(3,3)"]
 
-print(create_board(black_list,white_list))
+board_list = create_board(black_list,white_list)
+
+
+place(board_list)
+
 
 tk.mainloop()
