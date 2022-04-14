@@ -50,7 +50,7 @@ with open('problem_1.csv','w+') as file:
             x = input('x')
             y = input('y')
 
-            current = [color,f"{x},{y}"]
+            current = [color,f"({x},{y})"]
 
             line.append(current)
             print(current)

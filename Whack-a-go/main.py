@@ -96,7 +96,7 @@ def place(board):
 ## Problems ##
 ##############
 
-t1 = {'black':[0,1],'white':[0,1],'next':[0,1]]
+t1 = {'black':[0,1],'white':[0,1],'next':[0,1]}
 
 ############
 ## SENSEI ##
