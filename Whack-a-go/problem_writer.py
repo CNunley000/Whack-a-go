@@ -40,7 +40,7 @@ with open('problem_1.csv','w+') as file:
     # All other lines
 
     colors = ['b','y','x','e']
-
+    turnnum = 0
     while True:
         line = []
 
@@ -50,17 +50,17 @@ with open('problem_1.csv','w+') as file:
             x = input('x')
             y = input('y')
 
-            current = [color,f"({x},{y})"]
+            current = [color,[x,y]]
 
             line.append(current)
             print(current)
-            done = input("done?")
+            done = input(f"done? Turn #{turnnum}\nline = {line}\nY/N")
 
             if done == 'Y':
                 break
         writer.writerow(line)
        
         done = input("done?")
-
+        turnnum+=1
         if done == 'Y':
             break
