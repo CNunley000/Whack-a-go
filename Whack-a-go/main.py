@@ -13,20 +13,13 @@ window.title("goban")
 # Sensei will be open in another window, they will be chosen before game
 
 # create a photoimage variable
-size = 1
-
-black = tk.PhotoImage(file='goBLACK.png')
-white = tk.PhotoImage(file='goWHITE.png')
-empty = tk.PhotoImage(file='goEMPTY.png')
-black = black.zoom(size)
-white = white.zoom(size)
-empty = empty.zoom(size)
-
-
 def load_images(size):
-    black = tk.PhotoImage(file='goBLACK.png')
-    white = tk.PhotoImage(file='goWHITE.png')
-    empty = tk.PhotoImage(file='goEMPTY.png')
+    global black
+    global white
+    global empty
+    black = tk.PhotoImage(file='Whack-a-go/goBLACK.png')
+    white = tk.PhotoImage(file='Whack-a-go/goWHITE.png')
+    empty = tk.PhotoImage(file='Whack-a-go/goEMPTY.png')
     black = black.zoom(size)
     white = white.zoom(size)
     empty = empty.zoom(size)
@@ -55,7 +48,14 @@ def create_board(blackPts,whitePts,size=19):
 #####################################
 def play(board,changes):
     """changes 2d board list"""
-    print("Hello World :)")
+    for change in changes:
+        change = eval(change)
+        color = change[0]
+        x = int(change[1][0])
+        y = int(change[1][1])
+
+        board[x][y] = color
+    return(board)
 
 
 ###########################
@@ -109,14 +109,29 @@ t1 = {'black':[0,1],'white':[0,1],'next':[0,1]}
 ##############
 ## Run Game ##
 ##############
+load_images(1)
 
-black_list = ["(0,0)"]
-white_list = ["(3,3)"]
+problem = "problem_1.csv"
 
-board_list = create_board(black_list,white_list)
+with open(problem,'r') as file: # loads  in file, and sets up board, then sets up turns into a list
+    reader = csv.reader(file,delimiter=',')
+    turn_list = []
+    i = 0
+    for turn in reader:
+        if i == 0:
+            board = create_board(turn[0],turn[1],int(turn[2]))
+        
+        else:
+            turn_list.append(turn)
 
+        i += 1
 
-place(board_list)
+turn_num = 0
+while True:
+    board = play(board,turn_list[turn_num])
+    place(board)
+    input('Next turn?')
+    turn_num += 1
 
 
 tk.mainloop()
