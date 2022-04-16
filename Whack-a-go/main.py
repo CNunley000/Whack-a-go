@@ -24,9 +24,9 @@ def load_images(size):
     white = white.zoom(size)
     empty = empty.zoom(size)
 
-################
-# create board #
-################
+#####################
+# create board list #
+#####################
 def create_board(blackPts,whitePts,size=19):
     """Creates inital board set up in A 2d List"""
     board = []
@@ -57,6 +57,21 @@ def play(board,changes):
         board[x][y] = color
     return(board)
 
+def wrong():
+    """What happens when wrong button is pressed"""
+    print('Wrong Button')
+
+def right():
+    """Correct Button is pressed, must move game forward"""
+    global turn_num
+    global board
+    turn_num += 1
+    if turn_num > len(turn_list) - 1:
+        print('you win')
+    
+    else:
+        board = play(board,turn_list[turn_num])
+        place(board)
 
 ###########################
 # generate playable board #
@@ -80,23 +95,24 @@ def place(board):
     """takes a 2d list and generates the playable board WINDOW"""
     for row in range(0,len(board)):
         for col in range(0,len(board)):
-            current = board[row][col]
-            if current == 'b':
-                black_stone = tk.Button(image=black)
+            current = board[col][row]
+            if current == 'b': # black stone
+                black_stone = tk.Button(image=black, command=lambda:wrong())
                 black_stone.grid(column=col,row=row)
-            elif current == 'w':
-                white_stone = tk.Button(image=white)
+            elif current == 'w': # white stone
+                white_stone = tk.Button(image=white, command=lambda:wrong())
                 white_stone.grid(column=col,row=row)
-            else:
-                point = tk.Button(image=empty)
+            elif current == ' ': # empty point
+                point = tk.Button(image=empty, command=lambda:wrong())
                 point.grid(column=col,row=row)
+            elif current == 'x': # correct next move
+                correct = tk.Button(image=empty, command=lambda:right())
+                correct.grid(column=col,row=row)
                 
-
 ##############
 ## Problems ##
 ##############
 
-t1 = {'black':[0,1],'white':[0,1],'next':[0,1]}
 
 ############
 ## SENSEI ##
@@ -126,12 +142,11 @@ with open(problem,'r') as file: # loads  in file, and sets up board, then sets u
 
         i += 1
 
+
 turn_num = 0
-while True:
-    board = play(board,turn_list[turn_num])
-    place(board)
-    input('Next turn?')
-    turn_num += 1
+board = play(board,turn_list[turn_num])
+place(board)
+
 
 
 tk.mainloop()
