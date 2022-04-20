@@ -5,6 +5,8 @@
 import tkinter as tk
 import csv
 
+window = tk.Tk()
+window.title("goban")
 
 # This will be a tsume go program that gives you predetermined tsume go problems and you must continue in the right order
 # There will be a specified position to click, and if you click it the series will continue, with random 'Sensei' Responses in another window
@@ -124,9 +126,6 @@ def place(board):
 ## Run Game ##
 ##############
 load_images(1)
-
-window = tk.Tk()
-window.title("goban")
 
 problem = "problem_1.csv"
 
