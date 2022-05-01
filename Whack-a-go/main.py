@@ -4,13 +4,59 @@
 
 import tkinter as tk
 import csv
+import os
 
-window = tk.Tk()
-window.title("goban")
 
 # This will be a tsume go program that gives you predetermined tsume go problems and you must continue in the right order
 # There will be a specified position to click, and if you click it the series will continue, with random 'Sensei' Responses in another window
 # Sensei will be open in another window, they will be chosen before game
+
+################
+# title screen #
+################
+window = tk.Tk()
+window.title("welcome")
+window.geometry("400x400")
+
+name_box = tk.Text(height=1,width=10)
+name_box.grid(row=1,column=1,columnspan=3)
+name = input('name?')
+name_box.insert(tk.END,name)
+
+
+
+def check_settings(user):
+    """This checks for, and opens/creates settings file"""
+    settings_name = f"{user}_settings.txt"
+    settings_dict = {}
+    
+    if os.path.exists(settings_name) == True: # settings file already exists
+        with open(settings_name, 'r') as file:
+            i = 1
+            for line in file.readlines(): # alternates between key value ie : [zoom][y]
+                if even(i) == True:
+                    value = line
+                    settings_dict[key] = [value]
+                elif even(i) == False:
+                    key = line
+                i += 1
+    else:
+        settings_dict = settings_menu()
+
+def even(num):
+    """checks if num is even or not T/F"""
+    if num/2 == int(num/2):
+        return(True)
+    else:
+        return(False)
+
+def settings_menu():
+    """Changes to and generates a settings menu to change settings"""
+############
+# Settings #
+############
+
+
 
 # create a photoimage variable
 def load_images(size):
