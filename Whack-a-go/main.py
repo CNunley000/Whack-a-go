@@ -18,12 +18,13 @@ window = tk.Tk()
 window.title("welcome")
 window.geometry("400x400")
 
-name_box = tk.Text(height=1,width=10)
-name_box.grid(row=1,column=1,columnspan=3)
-name = input('name?')
-name_box.insert(tk.END,name)
 
-
+def retrieve_input():
+    """Retrieves input from tedxt box"""
+    global name
+    input=name_box.get("1.0","end-1c")
+    name = input
+    print(name)
 
 def check_settings(user):
     """This checks for, and opens/creates settings file"""
@@ -50,13 +51,15 @@ def even(num):
     else:
         return(False)
 
-def settings_menu():
-    """Changes to and generates a settings menu to change settings"""
 ############
 # Settings #
 ############
 
 
+def settings_menu():
+    """Changes to and generates a settings menu to change settings"""
+    settings_window = tk.Tk()
+    settings_window.title("Settings")
 
 # create a photoimage variable
 def load_images(size):
@@ -171,27 +174,34 @@ def place(board):
 ##############
 ## Run Game ##
 ##############
-load_images(1)
 
-problem = "problem_1.csv"
+name_box = tk.Text(height=1,width=10)
+name_box.grid(row=1,column=1,columnspan=3)
+enter = tk.Button(height=1, width=10, text="Commit", command=retrieve_input())
+enter.grid(row=2,column=3)
 
-with open(problem,'r') as file: # loads  in file, and sets up board, then sets up turns into a list
-    reader = csv.reader(file,delimiter=',')
-    turn_list = []
-    i = 0
-    for turn in reader:
-        if i == 0:
-            board = create_board(turn[0],turn[1],int(turn[2]))
+
+# load_images(1)
+
+# problem = "problem_1.csv"
+
+# with open(problem,'r') as file: # loads  in file, and sets up board, then sets up turns into a list
+#     reader = csv.reader(file,delimiter=',')
+#     turn_list = []
+#     i = 0
+#     for turn in reader:
+#         if i == 0:
+#             board = create_board(turn[0],turn[1],int(turn[2]))
         
-        else:
-            turn_list.append(turn)
+#         else:
+#             turn_list.append(turn)
 
-        i += 1
+#         i += 1
 
 
-turn_num = 0
-board = play(board,turn_list[turn_num])
-place(board)
+# turn_num = 0
+# board = play(board,turn_list[turn_num])
+# place(board)
 
 
 
