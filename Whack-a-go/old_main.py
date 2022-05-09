@@ -183,25 +183,25 @@ enter.grid(row=2,column=3)
 
 # load_images(1)
 
-# problem = "problem_1.csv"
+problem = "problem_1.csv"
 
-# with open(problem,'r') as file: # loads  in file, and sets up board, then sets up turns into a list
-#     reader = csv.reader(file,delimiter=',')
-#     turn_list = []
-#     i = 0
-#     for turn in reader:
-#         if i == 0:
-#             board = create_board(turn[0],turn[1],int(turn[2]))
+with open(problem,'r') as file: # loads  in file, and sets up board, then sets up turns into a list
+    reader = csv.reader(file,delimiter=',')
+    turn_list = []
+    i = 0
+    for turn in reader:
+        if i == 0:
+            board = create_board(turn[0],turn[1],int(turn[2]))
         
-#         else:
-#             turn_list.append(turn)
+        else:
+            turn_list.append(turn)
 
-#         i += 1
+        i += 1
 
 
-# turn_num = 0
-# board = play(board,turn_list[turn_num])
-# place(board)
+turn_num = 0
+board = play(board,turn_list[turn_num])
+place(board)
 
 
 

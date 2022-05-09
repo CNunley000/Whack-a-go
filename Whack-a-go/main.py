@@ -11,7 +11,6 @@ import tkinter as tk
 import csv
 import os
 
-
 ###################
 # OTHER FUNCTIONS #
 ###################
@@ -54,6 +53,18 @@ def  write_settings(path,settings_list=['Zoom or Shrink','Zoom','Zoom Amount','1
 
     set_settings(path)
 
+def load_images(size):
+    """loads in the go images"""
+    global black
+    global white
+    global empty
+    black = tk.PhotoImage(file='Whack-a-go/goBLACK.png')
+    white = tk.PhotoImage(file='Whack-a-go/goWHITE.png')
+    empty = tk.PhotoImage(file='Whack-a-go/goEMPTY.png')
+    black = black.zoom(size)
+    white = white.zoom(size)
+    empty = empty.zoom(size)
+
 #########################
 # window specific FUNCS #
 #########################
@@ -90,11 +101,25 @@ def settings_button(stuff):
     """Because of LAMDA in button variables need to be passed through in stuff list lol. Settings button, sets a new key value as determined by button"""
     global settings
 
-    key = stuff[0]
-    where = stuff[1]
-    value = globals()[where]
-    settings[key] = value.get("1.0","end-1c")
-    print(f"{key} = {value}")
+    if stuff == 'main':
+        window.destroy()
+        win_main()
+
+    else:
+        key = stuff[0]
+        i = stuff[1]
+        #value = eval(f'{where}.get("1.0","end-1c")') 
+        value = eval(f'new_setting{i}.get("1.0","end-1c")')
+        settings[key] = value
+        print(f"{key} = {value}")
+
+        write_settings(file_name,['Zoom or Shrink', settings['Zoom or Shrink'], 'Zoom Amount', settings['Zoom Amount'], 'Sensei', settings['Sensei']])
+
+def return_to_menu():
+    """returns user to main menu NOT NEEDED if I put window.destroy at beginning of win_ functions"""
+    global window
+    
+    window.destroy()
 
 # MAIN
 def main_button(command='Button Not set'):
@@ -110,6 +135,66 @@ def main_button(command='Button Not set'):
         print(f"err : {command}")
 
 # GAME
+def create_board(blackPts,whitePts,size=19):
+    """Creates inital board set up in A 2d List"""
+    board = []
+    
+    for x in range(size):
+        board.append([])
+        for y in range(size):
+            if f"({x},{y})" in blackPts:
+                board[x].append('b')
+            elif f"({x},{y})" in whitePts:
+                board[x].append('w')
+            else:
+                board[x].append(' ')
+
+    return(board)
+
+def play(board,changes):
+    """changes 2d board list"""
+    for change in changes:
+        change = eval(change)
+        color = change[0]
+        x = int(change[1][0])
+        y = int(change[1][1])
+
+        board[x][y] = color
+    return(board)
+
+def place(board):
+    """takes a 2d list and generates the playable board WINDOW"""
+    for row in range(0,len(board)):
+        for col in range(0,len(board)):
+            current = board[col][row]
+            if current == 'b': # black stone
+                black_stone = tk.Button(window,image=black, command=lambda :wrong())
+                black_stone.grid(column=col,row=row)
+            elif current == 'w': # white stone
+                white_stone = tk.Button(window,image=white, command=lambda :wrong())
+                white_stone.grid(column=col,row=row)
+            elif current == ' ': # empty point
+                point = tk.Button(window,image=empty, command=lambda :wrong())
+                point.grid(column=col,row=row)
+            elif current == 'x': # correct next move
+                correct = tk.Button(window,image=empty, command=lambda :right())
+                correct.grid(column=col,row=row)
+
+def wrong():
+    """What happens when wrong button is pressed"""
+    print('Wrong Button')
+
+def right():
+    """Correct Button is pressed, must move game forward"""
+    global turn_num
+    global board
+    turn_num += 1
+    if turn_num > len(turn_list) - 1:
+        print('you win')
+    
+    else:
+        board = play(board,turn_list[turn_num])
+        place(board)
 
 
 # SENSEI
@@ -153,6 +238,7 @@ def win_settings():
     global window
     global settings
 
+
     window = tk.Tk()
     window.title("settings")
     window.geometry("400x600")
@@ -164,11 +250,13 @@ def win_settings():
     for setting in settings.keys():
         globals()[f"new_setting{i}"] = tk.Text(height=1,width=10)
         globals()[f"new_setting{i}"].grid(column=1,row=i)
-        globals()[f"lambda_vars{i}"] = [(setting),f'new_settting{i}']
+        globals()[f"lambda_vars{i}"] = [(setting),f'{i}']
         update = tk.Button(height=1, width=10, text=setting, command= lambda b=globals()[f"lambda_vars{i}"]:settings_button(b))
         update.grid(column=0,row=i)
         i +=1
 
+        new_button = tk.Button(height=1, width=20, text='Main Menu',command = lambda b='main' :settings_button(b))
+        new_button.grid(column=0,row=10,columnspan=2)
 
 # main menu
     # This will give the option to start the game or go to settings menu
@@ -200,14 +288,34 @@ def win_main():
     # loading the next move when they get the correct answer
 def win_game(problem):
     """Actual tsumego window"""
-    print('game')
+    global window
+    global turn_num
+    global turn_list
+
+    window = tk.Tk()
+    window.title('goban')
+
+    load_images(settings['Zoom Amount'])
+
+    with open(problem,'r') as file: # loads  in file, and sets up board, then sets up turns into a list
+        reader = csv.reader(file,delimiter=',')
+        turn_list = []
+        i = 0
+        for turn in reader:
+            if i == 0:
+                board = create_board(turn[0],turn[1],int(turn[2]))
+        
+            else:
+                turn_list.append(turn)
+
+            i += 1
 
 
-# sensei window
-    # this is a window with a semi-animated 'sensei' who will react to the user's sucess
-def win_sensei():
-    """Sensei top window"""
-    print('sensei')
+    turn_num = 0
+    board = play(board,turn_list[turn_num])
+    place(board)
+
+
 
 
 ####################
