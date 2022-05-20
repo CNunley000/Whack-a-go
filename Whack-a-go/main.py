@@ -168,17 +168,38 @@ def place(board):
         for col in range(0,len(board)):
             current = board[col][row]
             if current == 'b': # black stone
-                black_stone = tk.Button(window,image=black, command=lambda :wrong())
-                black_stone.grid(column=col,row=row)
+                globals()[f"{row}x{col}"] = tk.Button(window,image=black, command=lambda :wrong())
+                globals()[f"{row}x{col}"].grid(column=col,row=row)
             elif current == 'w': # white stone
-                white_stone = tk.Button(window,image=white, command=lambda :wrong())
-                white_stone.grid(column=col,row=row)
+                globals()[f"{row}x{col}"] = tk.Button(window,image=white, command=lambda :wrong())
+                globals()[f"{row}x{col}"].grid(column=col,row=row)
             elif current == ' ': # empty point
-                point = tk.Button(window,image=empty, command=lambda :wrong())
-                point.grid(column=col,row=row)
+                globals()[f"{row}x{col}"] = tk.Button(window,image=empty, command=lambda :wrong())
+                globals()[f"{row}x{col}"].grid(column=col,row=row)
             elif current == 'x': # correct next move
-                correct = tk.Button(window,image=empty, command=lambda :right())
-                correct.grid(column=col,row=row)
+                globals()[f"{row}x{col}"] = tk.Button(window,image=empty, command=lambda :right())
+                globals()[f"{row}x{col}"].grid(column=col,row=row)
+
+
+
+def take_turn(board):
+    """Updates the current board window """
+    for row in range(0,len(board)):
+        for col in range(0,len(board)):
+            current = board[col][row]
+            if current == 'b': # black stone
+                globals()[f"{row}x{col}"]['image']= black
+                globals()[f"{row}x{col}"]['command']=lambda :wrong()
+            elif current == 'w': # white stone
+                globals()[f"{row}x{col}"]['image']= white
+                globals()[f"{row}x{col}"]['command']=lambda :wrong()
+            elif current == ' ': # empty point
+                globals()[f"{row}x{col}"]['image']= empty
+                globals()[f"{row}x{col}"]['command']=lambda :wrong()
+            elif current == 'x': # correct next move
+                globals()[f"{row}x{col}"]['image']= empty
+                globals()[f"{row}x{col}"]['command']=lambda :right()
+
 
 def wrong():
     """What happens when wrong button is pressed"""
@@ -194,7 +215,7 @@ def right():
     
     else:
         board = play(board,turn_list[turn_num])
-        place(board)
+        take_turn(board)
 
 
 # SENSEI
@@ -291,6 +312,7 @@ def win_game(problem):
     global window
     global turn_num
     global turn_list
+    global board
 
     window = tk.Tk()
     window.title('goban')
